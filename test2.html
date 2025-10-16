@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Wedding Organizer - Resepsi Pernikahan Mewah & Elegan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .card-hover {
+            transition: all 0.4s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-btn {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(236, 72, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .nav-link.active {
+            color: #7c3aed;
+            font-weight: bold;
+            border-bottom: 2px solid #7c3aed;
+        }
+        
+        .testimonial-slider {
+            overflow: hidden;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .price-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(15deg);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #7c3aed;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(124, 58, 237, 0.8), rgba(236, 72, 153, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .package-popular {
+            position: relative;
+            border: 3px solid #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        .package-popular::before {
+            content: "TERPOPULER";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        .promo-banner {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24, #feca57, #48dbfb);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+        }
+        
+        .service-card:hover::before {
+            animation: shine 0.5s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6282196494957?text=Halo%20Royal%20Wedding%20Organizer,%20saya%20tertarik%20dengan%20layanan%20resepsi%20pernikahan%20Anda" 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner text-white py-3 text-center relative overflow-hidden">
+        <div class="container mx-auto px-4">
+            <p class="font-bold text-sm md:text-base">
+                🎉 PROMO AKHIR TAHUN! Diskon hingga 25% + Gratis Pre-Wedding Shoot! 
+                <span class="bg-white text-red-600 px-2 py-1 rounded-full text-xs ml-2">Terbatas!</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-xl fixed w-full z-40 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="text-3xl font-bold gradient-text cursor-pointer flex items-center" onclick="showPage('home')">
+                        <i class="fas fa-crown mr-2"></i>
+                        Royal Wedding
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#" onclick="showPage('home')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Beranda</a>
+                        <a href="#" onclick="showPage('services')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Layanan</a>
+                        <a href="#" onclick="showPage('packages')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Paket</a>
+                        <a href="#" onclick="showPage('gallery')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Galeri</a>
+                        <a href="#" onclick="showPage('testimonials')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Testimoni</a>
+                        <a href="#" onclick="showPage('about')" class="nav-link text-gray-700 hover:text-purple-600 px-3 py-2 rounded-md font-medium transition">Tentang</a>
+                        <a href="#" onclick="showPage('contact')" class="nav-link bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full font-medium transition hover:shadow-lg">Konsultasi</a>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" onclick="showPage('home')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Beranda</a>
+                <a href="#" onclick="showPage('services')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Layanan</a>
+                <a href="#" onclick="showPage('packages')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Paket</a>
+                <a href="#" onclick="showPage('gallery')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Galeri</a>
+                <a href="#" onclick="showPage('testimonials')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Testimoni</a>
+                <a href="#" onclick="showPage('about')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Tentang</a>
+                <a href="#" onclick="showPage('contact')" class="nav-link block px-3 py-2 text-gray-700 hover:text-purple-600">Konsultasi</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-screen flex items-center justify-center text-white relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-900/50 to-pink-900/50"></div>
+            <div class="text-center px-4 relative z-10 max-w-5xl mx-auto">
+                <div class="floating mb-8">
+                    <i class="fas fa-heart text-6xl text-pink-400 mb-4"></i>
+                </div>
+                <h1 class="text-5xl md:text-8xl font-bold mb-6 leading-tight">
+                    Resepsi Pernikahan
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+                        Impian Anda
+                    </span>
+                </h1>
+                <p class="text-xl md:text-3xl mb-12 max-w-4xl mx-auto leading-relaxed">
+                    Wujudkan momen terindah dalam hidup Anda bersama Royal Wedding Organizer. 
+                    Layanan premium dengan sentuhan mewah dan elegan.
+                </p>
+                <div class="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <button onclick="showPage('packages')" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-6 px-12 rounded-full text-xl transition transform hover:scale-105 pulse-btn shadow-2xl">
+                        <i class="fas fa-gem mr-3"></i>
+                        Lihat Paket Premium
+                    </button>
+                    <button onclick="openModal('consultationModal')" class="border-2 border-white text-white hover:bg-white hover:text-purple-600 font-bold py-6 px-12 rounded-full text-xl transition transform hover:scale-105">
+                        <i class="fas fa-calendar-alt mr-3"></i>
+                        Konsultasi Gratis
+                    </button>
+                </div>
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="stats-counter">1000+</div>
+                        <p class="text-lg">Resepsi Sukses</p>
+                    </div>
+                    <div>
+                        <div class="stats-counter">99%</div>
+                        <p class="text-lg">Kepuasan Klien</p>
+                    </div>
+                    <div>
+                        <div class="stats-counter">10+</div>
+                        <p class="text-lg">Tahun Pengalaman</p>
+                    </div>
+                    <div>
+                        <div class="stats-counter">50+</div>
+                        <p class="text-lg">Vendor Partner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i class="fas fa-chevron-down text-3xl text-white"></i>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-24 bg-gradient-to-br from-gray-50 to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Mengapa Memilih Kami?</h2>
+                    <p class="text-2xl text-gray-600 max-w-3xl mx-auto">Keunggulan layanan yang membuat resepsi Anda tak terlupakan</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="text-center p-8 card-hover bg-white rounded-3xl shadow-lg">
+                        <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-palette text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Dekorasi Eksklusif</h3>
+                        <p class="text-gray-600 text-lg leading-relaxed">Desain dekorasi yang unik dan personal sesuai dengan tema impian Anda. Tim desainer profesional dengan pengalaman internasional.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 card-hover bg-white rounded-3xl shadow-lg">
+                        <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-utensils text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Kuliner Premium</h3>
+                        <p class="text-gray-600 text-lg leading-relaxed">Menu berkualitas tinggi dari chef berpengalaman dengan cita rasa terbaik. Pilihan menu internasional dan tradisional.</p>
+                    </div>
+                    
+                    <div class="text-center p-8 card-hover bg-white rounded-3xl shadow-lg">
+                        <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-camera text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-900">Dokumentasi Cinematic</h3>
+                        <p class="text-gray-600 text-lg leading-relaxed">Foto dan video cinematic berkualitas 4K untuk mengabadikan momen berharga Anda dengan teknologi terdepan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section class="py-24 bg-gradient-to-r from-purple-900 to-pink-900 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold mb-6">Layanan Lengkap Kami</h2>
+                    <p class="text-2xl max-w-3xl mx-auto">Semua yang Anda butuhkan untuk resepsi pernikahan sempurna</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="service-card card-hover">
+                        <i class="fas fa-crown text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Wedding Planning</h3>
+                        <p class="text-sm opacity-90">Perencanaan lengkap dari A sampai Z</p>
+                    </div>
+                    <div class="service-card card-hover">
+                        <i class="fas fa-flower text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Dekorasi & Florist</h3>
+                        <p class="text-sm opacity-90">Dekorasi mewah dengan bunga segar</p>
+                    </div>
+                    <div class="service-card card-hover">
+                        <i class="fas fa-music text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Entertainment</h3>
+                        <p class="text-sm opacity-90">Live music & hiburan berkelas</p>
+                    </div>
+                    <div class="service-card card-hover">
+                        <i class="fas fa-car text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-3">Bridal Car</h3>
+                        <p class="text-sm opacity-90">Mobil pengantin mewah</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-16">
+                    <button onclick="showPage('services')" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-full text-xl transition transform hover:scale-105">
+                        Lihat Semua Layanan
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="py-24 bg-white pt-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Layanan Premium Kami</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Solusi lengkap untuk resepsi pernikahan impian Anda dengan standar internasional</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-16 mb-20">
+                    <!-- Wedding Planning -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-12 card-hover">
+                        <div class="flex items-center mb-8">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-6">
+                                <i class="fas fa-crown text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900">Wedding Planning</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Perencanaan pernikahan menyeluruh dari konsep hingga eksekusi. Tim wedding planner berpengalaman akan membantu mewujudkan visi pernikahan impian Anda.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Konsultasi dan perencanaan detail
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Timeline dan koordinasi vendor
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Manajemen budget dan kontrak
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Koordinasi hari H
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Decoration -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 card-hover">
+                        <div class="flex items-center mb-8">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center mr-6">
+                                <i class="fas fa-palette text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900">Dekorasi & Florist</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Desain dekorasi eksklusif dengan sentuhan artistik tinggi. Menggunakan bunga segar premium dan material berkualitas internasional.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Desain pelaminan mewah
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dekorasi venue & backdrop
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Bunga segar & artificial premium
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Lighting & sound system
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Catering -->
+                    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-12 card-hover">
+                        <div class="flex items-center mb-8">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center mr-6">
+                                <i class="fas fa-utensils text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900">Catering Premium</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Menu kuliner berkelas dengan chef profesional berpengalaman. Pilihan menu internasional dan tradisional dengan presentasi yang memukau.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Menu prasmanan & ala carte
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Live cooking station
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dessert bar & wedding cake
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Beverage package lengkap
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Documentation -->
+                    <div class="bg-gradient-to-br from-yellow-50 to-red-50 rounded-3xl p-12 card-hover">
+                        <div class="flex items-center mb-8">
+                            <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-red-500 rounded-full flex items-center justify-center mr-6">
+                                <i class="fas fa-camera text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900">Dokumentasi Cinematic</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">Dokumentasi foto dan video berkualitas 4K dengan teknologi terdepan. Tim fotografer dan videografer profesional dengan pengalaman internasional.</p>
+                        <ul class="space-y-4">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Pre-wedding photoshoot
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Wedding day coverage
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Cinematic video 4K
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Drone photography
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 rounded-3xl p-16 text-white">
+                    <h3 class="text-4xl font-bold text-center mb-12">Layanan Tambahan</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <i class="fas fa-music text-4xl mb-4"></i>
+                            <h4 class="text-xl font-bold mb-3">Entertainment</h4>
+                            <p class="opacity-90">Live band, DJ, MC profesional, dan hiburan khusus</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-car text-4xl mb-4"></i>
+                            <h4 class="text-xl font-bold mb-3">Transportation</h4>
+                            <p class="opacity-90">Bridal car mewah dan transportasi tamu VIP</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-spa text-4xl mb-4"></i>
+                            <h4 class="text-xl font-bold mb-3">Bridal Care</h4>
+                            <p class="opacity-90">Make up artist, hair do, dan perawatan pengantin</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PACKAGES PAGE -->
+    <div id="packages" class="page">
+        <section class="py-24 bg-gradient-to-br from-gray-50 to-white pt-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Paket Resepsi Premium</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Pilih paket yang sesuai dengan impian dan budget Anda. Semua paket dapat disesuaikan dengan kebutuhan khusus.</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-3 gap-12 mb-20">
+                    <!-- Silver Package -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-10 card-hover relative">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-gem text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Paket Silver</h3>
+                            <div class="text-5xl font-bold text-gray-600 mb-2">Rp 35.000.000</div>
+                            <p class="text-gray-500 text-lg">Untuk 200-250 tamu</p>
+                        </div>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dekorasi pelaminan elegant
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Catering prasmanan 12 menu
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Sound system & lighting
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dokumentasi foto (300 foto)
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                MC profesional
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Wedding cake 2 tier
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('Silver', 35000000)" class="w-full bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-4 px-6 rounded-full text-lg transition transform hover:scale-105">
+                            Pilih Paket Silver
+                        </button>
+                    </div>
+
+                    <!-- Gold Package (Popular) -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-10 card-hover relative package-popular">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center">
+                                <i class="fas fa-crown text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Paket Gold</h3>
+                            <div class="text-5xl font-bold text-yellow-600 mb-2">Rp 65.000.000</div>
+                            <p class="text-gray-500 text-lg">Untuk 300-400 tamu</p>
+                        </div>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Semua fitur Silver Package
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dekorasi premium + backdrop
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Live music acoustic
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Video cinematic highlight
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Wedding cake 3 tier custom
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Bridal car decoration
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('Gold', 65000000)" class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-bold py-4 px-6 rounded-full text-lg transition transform hover:scale-105">
+                            Pilih Paket Gold
+                        </button>
+                    </div>
+
+                    <!-- Platinum Package -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-10 card-hover relative">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-diamond text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Paket Platinum</h3>
+                            <div class="text-5xl font-bold text-purple-600 mb-2">Rp 120.000.000</div>
+                            <p class="text-gray-500 text-lg">Untuk 500+ tamu</p>
+                        </div>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Semua fitur Gold Package
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Dekorasi mewah international
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Orchestra live performance
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Full cinematic video 4K
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Drone photography
+                            </li>
+                            <li class="flex items-center text-gray-700">
+                                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                                Bridal suite & luxury car
+                            </li>
+                        </ul>
+                        <button onclick="selectPackage('Platinum', 120000000)" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 px-6 rounded-full text-lg transition transform hover:scale-105">
+                            Pilih Paket Platinum
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package Comparison Table -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-8">
+                        <h3 class="text-3xl font-bold text-center">Perbandingan Detail Paket</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-4 text-left font-bold text-gray-900">Fitur Layanan</th>
+                                    <th class="px-6 py-4 text-center font-bold text-gray-600">Silver</th>
+                                    <th class="px-6 py-4 text-center font-bold text-yellow-600">Gold</th>
+                                    <th class="px-6 py-4 text-center font-bold text-purple-600">Platinum</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Kapasitas Tamu</td>
+                                    <td class="px-6 py-4 text-center">200-250</td>
+                                    <td class="px-6 py-4 text-center">300-400</td>
+                                    <td class="px-6 py-4 text-center">500+</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="px-6 py-4 font-medium">Dekorasi</td>
+                                    <td class="px-6 py-4 text-center">Elegant</td>
+                                    <td class="px-6 py-4 text-center">Premium</td>
+                                    <td class="px-6 py-4 text-center">International Luxury</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Menu Catering</td>
+                                    <td class="px-6 py-4 text-center">12 Menu</td>
+                                    <td class="px-6 py-4 text-center">16 Menu</td>
+                                    <td class="px-6 py-4 text-center">20+ Menu + Live Station</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="px-6 py-4 font-medium">Entertainment</td>
+                                    <td class="px-6 py-4 text-center">MC</td>
+                                    <td class="px-6 py-4 text-center">MC + Live Music</td>
+                                    <td class="px-6 py-4 text-center">MC + Orchestra</td>
+                                </tr>
+                                <tr>
+                                    <td class="px-6 py-4 font-medium">Dokumentasi</td>
+                                    <td class="px-6 py-4 text-center">300 Foto</td>
+                                    <td class="px-6 py-4 text-center">500 Foto + Video</td>
+                                    <td class="px-6 py-4 text-center">Unlimited + 4K Video + Drone</td>
+                                </tr>
+                                <tr class="bg-gray-50">
+                                    <td class="px-6 py-4 font-medium">Wedding Cake</td>
+                                    <td class="px-6 py-4 text-center">2 Tier</td>
+                                    <td class="px-6 py-4 text-center">3 Tier Custom</td>
+                                    <td class="px-6 py-4 text-center">5 Tier Luxury Design</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Custom Package CTA -->
+                <div class="mt-20 text-center">
+                    <div class="bg-gradient-to-r from-purple-900 to-pink-900 rounded-3xl p-16 text-white">
+                        <h3 class="text-4xl font-bold mb-6">Butuh Paket Khusus?</h3>
+                        <p class="text-xl mb-8 max-w-3xl mx-auto">Kami juga menyediakan paket custom sesuai dengan kebutuhan dan budget Anda. Konsultasikan impian pernikahan Anda dengan tim ahli kami.</p>
+                        <button onclick="openModal('consultationModal')" class="bg-white text-purple-600 hover:bg-gray-100 font-bold py-4 px-12 rounded-full text-xl transition transform hover:scale-105">
+                            <i class="fas fa-comments mr-3"></i>
+                            Konsultasi Custom Package
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- GALLERY PAGE -->
+    <div id="gallery" class="page">
+        <section class="py-24 bg-white pt-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Galeri Karya Terbaik</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Lihat hasil karya terbaik kami yang telah mewujudkan impian ribuan pasangan</p>
+                </div>
+                
+                <!-- Gallery Filter -->
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <button onclick="filterGallery('all')" class="gallery-filter active bg-purple-600 text-white px-6 py-3 rounded-full font-medium transition hover:bg-purple-700">
+                        Semua
+                    </button>
+                    <button onclick="filterGallery('decoration')" class="gallery-filter bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-medium transition hover:bg-purple-600 hover:text-white">
+                        Dekorasi
+                    </button>
+                    <button onclick="filterGallery('catering')" class="gallery-filter bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-medium transition hover:bg-purple-600 hover:text-white">
+                        Catering
+                    </button>
+                    <button onclick="filterGallery('cake')" class="gallery-filter bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-medium transition hover:bg-purple-600 hover:text-white">
+                        Wedding Cake
+                    </button>
+                    <button onclick="filterGallery('documentation')" class="gallery-filter bg-gray-200 text-gray-700 px-6 py-3 rounded-full font-medium transition hover:bg-purple-600 hover:text-white">
+                        Dokumentasi
+                    </button>
+                </div>
+                
+                <!-- Gallery Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                    <div class="gallery-item decoration" data-category="decoration">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Dekorasi Pelaminan Mewah" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Dekorasi Pelaminan Royal</h3>
+                                <p class="text-sm mt-2">Tema Gold & Burgundy</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item cake" data-category="cake">
+                        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Wedding Cake Bertingkat" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Wedding Cake 5 Tier</h3>
+                                <p class="text-sm mt-2">Custom Design Luxury</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item catering" data-category="catering">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Catering Premium" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Catering International</h3>
+                                <p class="text-sm mt-2">Menu Fusion Premium</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item documentation" data-category="documentation">
+                        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Wedding Photography" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Cinematic Photography</h3>
+                                <p class="text-sm mt-2">4K Professional Quality</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item decoration" data-category="decoration">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Wedding Venue Setup" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Venue Transformation</h3>
+                                <p class="text-sm mt-2">Garden Party Theme</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item decoration" data-category="decoration">
+                        <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Wedding Lighting" 
+                             class="w-full h-80 object-cover"
+                             onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="gallery-overlay">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold">Romantic Lighting</h3>
+                                <p class="text-sm mt-2">Fairy Tale Ambiance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Stats -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 rounded-3xl p-16 text-white">
+                    <h3 class="text-4xl font-bold text-center mb-12">Portfolio Kami</h3>
+                    <div class="grid md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <div class="text-5xl font-bold mb-2">1000+</div>
+                            <p class="text-xl">Resepsi Sukses</p>
+                        </div>
+                        <div>
+                            <div class="text-5xl font-bold mb-2">50+</div>
+                            <p class="text-xl">Venue Partner</p>
+                        </div>
+                        <div>
+                            <div class="text-5xl font-bold mb-2">100+</div>
+                            <p class="text-xl">Tema Dekorasi</p>
+                        </div>
+                        <div>
+                            <div class="text-5xl font-bold mb-2">24/7</div>
+                            <p class="text-xl">Customer Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- TESTIMONIALS PAGE -->
+    <div id="testimonials" class="page">
+        <section class="py-24 bg-gradient-to-br from-gray-50 to-white pt-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Testimoni Klien Bahagia</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Kepuasan dan kebahagiaan klien adalah prioritas utama kami</p>
+                </div>
+                
+                <!-- Featured Testimonials -->
+                <div class="grid lg:grid-cols-3 gap-12 mb-20">
+                    <div class="bg-white rounded-3xl p-10 shadow-2xl card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                A
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-xl text-gray-900">Andi & Sari</h4>
+                                <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed italic">"Resepsi pernikahan kami sangat sempurna! Tim Royal Wedding sangat profesional dan detail. Semua tamu terpukau dengan dekorasinya yang mewah. Terima kasih telah mewujudkan impian kami!"</p>
+                        <div class="mt-6 text-sm text-gray-500">
+                            <i class="fas fa-calendar mr-2"></i>
+                            Paket Gold - Desember 2023
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-10 shadow-2xl card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                B
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-xl text-gray-900">Budi & Maya</h4>
+                                <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed italic">"Pelayanan luar biasa dari awal konsultasi hingga hari H! Koordinasi yang sangat baik, makanannya enak sekali, dan dokumentasinya berkualitas tinggi. Highly recommended!"</p>
+                        <div class="mt-6 text-sm text-gray-500">
+                            <i class="fas fa-calendar mr-2"></i>
+                            Paket Platinum - November 2023
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-10 shadow-2xl card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                C
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-xl text-gray-900">Citra & Doni</h4>
+                                <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed italic">"Terima kasih Royal Wedding! Resepsi kami jadi sangat berkesan dan memorable. Tim yang sangat responsif dan kreatif. Dokumentasinya juga bagus banget, jadi kenangan indah selamanya."</p>
+                        <div class="mt-6 text-sm text-gray-500">
+                            <i class="fas fa-calendar mr-2"></i>
+                            Paket Silver - Oktober 2023
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Testimonials -->
+                <div class="grid lg:grid-cols-2 gap-12 mb-20">
+                    <div class="bg-white rounded-3xl p-10 shadow-2xl card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                D
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-xl text-gray-900">Dimas & Eka</h4>
+                                <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed italic">"Wedding organizer terbaik di Jakarta! Mereka sangat memahami keinginan kami dan mewujudkannya dengan sempurna. Harga juga sangat reasonable untuk kualitas yang diberikan. Pokoknya top deh!"</p>
+                        <div class="mt-6 text-sm text-gray-500">
+                            <i class="fas fa-calendar mr-2"></i>
+                            Paket Gold - September 2023
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-10 shadow-2xl card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                                F
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-xl text-gray-900">Fajar & Gita</h4>
+                                <div class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed italic">"Koordinasi yang sangat baik dari tim Royal Wedding. Kami tidak perlu khawatir tentang apapun di hari pernikahan karena semuanya sudah diatur dengan sempurna. Tim yang sangat profesional dan berpengalaman."</p>
+                        <div class="mt-6 text-sm text-gray-500">
+                            <i class="fas fa-calendar mr-2"></i>
+                            Paket Platinum - Agustus 2023
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Testimonials -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 rounded-3xl p-16 text-white mb-20">
+                    <h3 class="text-4xl font-bold text-center mb-12">Video Testimoni</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white/10 rounded-2xl p-8 text-center card-hover">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Reza & Indah</h4>
+                            <p class="opacity-90 mb-4">"Pengalaman luar biasa dengan Royal Wedding..."</p>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition">
+                                Tonton Video
+                            </button>
+                        </div>
+                        <div class="bg-white/10 rounded-2xl p-8 text-center card-hover">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Arif & Sinta</h4>
+                            <p class="opacity-90 mb-4">"Dekorasi yang sangat memukau dan pelayanan terbaik..."</p>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition">
+                                Tonton Video
+                            </button>
+                        </div>
+                        <div class="bg-white/10 rounded-2xl p-8 text-center card-hover">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-play text-2xl"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Yoga & Dewi</h4>
+                            <p class="opacity-90 mb-4">"Tim yang sangat profesional dan hasil yang memuaskan..."</p>
+                            <button class="bg-white text-purple-600 px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition">
+                                Tonton Video
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="bg-white rounded-3xl shadow-2xl p-16">
+                    <h3 class="text-4xl font-bold text-center mb-12 text-gray-900">Kepuasan Klien Kami</h3>
+                    <div class="grid md:grid-cols-4 gap-12 text-center">
+                        <div>
+                            <div class="text-6xl font-bold text-purple-600 mb-4">1000+</div>
+                            <p class="text-xl text-gray-600">Resepsi Sukses</p>
+                            <p class="text-sm text-gray-500 mt-2">Sejak 2014</p>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-bold text-pink-600 mb-4">99%</div>
+                            <p class="text-xl text-gray-600">Tingkat Kepuasan</p>
+                            <p class="text-sm text-gray-500 mt-2">Rating 4.9/5.0</p>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-bold text-blue-600 mb-4">10+</div>
+                            <p class="text-xl text-gray-600">Tahun Pengalaman</p>
+                            <p class="text-sm text-gray-500 mt-2">Sejak 2014</p>
+                        </div>
+                        <div>
+                            <div class="text-6xl font-bold text-green-600 mb-4">24/7</div>
+                            <p class="text-xl text-gray-600">Customer Support</p>
+                            <p class="text-sm text-gray-500 mt-2">Siap Melayani</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="py-24 bg-white pt-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Company Story -->
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Tentang Royal Wedding</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Mewujudkan impian pernikahan dengan sentuhan royal dan pelayanan premium sejak 2014</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                    <div>
+                        <h3 class="text-4xl font-bold text-gray-900 mb-8">Cerita Kami</h3>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Royal Wedding Organizer didirikan pada tahun 2014 dengan visi menjadi wedding organizer terdepan di Indonesia. Kami memahami bahwa setiap pasangan memiliki impian unik untuk hari bahagia mereka.
+                        </p>
+                        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                            Dengan pengalaman lebih dari 10 tahun dan telah menangani 1000+ resepsi pernikahan, kami berkomitmen memberikan layanan terbaik dengan standar internasional. Tim profesional kami terdiri dari wedding planner bersertifikat, desainer kreatif, dan koordinator berpengalaman.
+                        </p>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            Kepuasan klien adalah prioritas utama kami. Setiap detail diperhatikan dengan seksama untuk memastikan hari bahagia Anda berjalan sempurna dan tak terlupakan.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl p-2">
+                            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Royal Wedding Team" 
+                                 class="w-full h-96 object-cover rounded-2xl"
+                                 onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-2xl">
+                            <div class="text-3xl font-bold text-purple-600">10+</div>
+                            <div class="text-sm text-gray-600">Tahun Pengalaman</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Our Values -->
+                <div class="mb-24">
+                    <h3 class="text-4xl font-bold text-center text-gray-900 mb-16">Nilai-Nilai Kami</h3>
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-heart text-2xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4">Passion</h4>
+                            <p class="text-gray-600 leading-relaxed">Kami mencintai apa yang kami lakukan. Setiap proyek adalah kesempatan untuk menciptakan kebahagiaan dan kenangan indah.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-star text-2xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4">Excellence</h4>
+                            <p class="text-gray-600 leading-relaxed">Standar kualitas tinggi dalam setiap aspek layanan. Kami tidak pernah berkompromi dengan kualitas dan kepuasan klien.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-handshake text-2xl text-white"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-4">Trust</h4>
+                            <p class="text-gray-600 leading-relaxed">Kepercayaan adalah fondasi hubungan kami dengan klien. Transparansi dan integritas dalam setiap langkah.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Our Team -->
+                <div class="mb-24">
+                    <h3 class="text-4xl font-bold text-center text-gray-900 mb-16">Tim Profesional Kami</h3>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="text-center card-hover">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Sarah Wijaya</h4>
+                            <p class="text-purple-600 font-medium mb-3">Founder & CEO</p>
+                            <p class="text-gray-600 text-sm">10+ tahun pengalaman dalam industri wedding organizer</p>
+                        </div>
+                        <div class="text-center card-hover">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Michael Chen</h4>
+                            <p class="text-purple-600 font-medium mb-3">Creative Director</p>
+                            <p class="text-gray-600 text-sm">Spesialis dekorasi dan desain dengan sentuhan internasional</p>
+                        </div>
+                        <div class="text-center card-hover">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Diana Putri</h4>
+                            <p class="text-purple-600 font-medium mb-3">Wedding Planner</p>
+                            <p class="text-gray-600 text-sm">Ahli koordinasi dan manajemen acara pernikahan</p>
+                        </div>
+                        <div class="text-center card-hover">
+                            <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-yellow-500 to-red-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-4xl text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-gray-900 mb-2">Reza Pratama</h4>
+                            <p class="text-purple-600 font-medium mb-3">Operations Manager</p>
+                            <p class="text-gray-600 text-sm">Memastikan kelancaran operasional dan kepuasan klien</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Awards & Recognition -->
+                <div class="bg-gradient-to-r from-purple-900 to-pink-900 rounded-3xl p-16 text-white">
+                    <h3 class="text-4xl font-bold text-center mb-12">Penghargaan & Sertifikasi</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-trophy text-3xl text-yellow-400"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">Best Wedding Organizer 2023</h4>
+                            <p class="opacity-90">Indonesia Wedding Awards</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-certificate text-3xl text-yellow-400"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">ISO 9001:2015 Certified</h4>
+                            <p class="opacity-90">Quality Management System</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center">
+                                <i class="fas fa-star text-3xl text-yellow-400"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-3">5 Star Rating</h4>
+                            <p class="opacity-90">Google Reviews & Social Media</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="py-24 bg-gradient-to-br from-gray-50 to-white pt-32">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-20">
+                    <h2 class="text-5xl font-bold text-gray-900 mb-6">Hubungi Kami</h2>
+                    <p class="text-2xl text-gray-600 max-w-4xl mx-auto">Siap mewujudkan resepsi pernikahan impian Anda? Mari berdiskusi tentang visi dan keinginan Anda.</p>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-16">
+                    <!-- Contact Form -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-12">
+                        <h3 class="text-3xl font-bold text-gray-900 mb-8">Konsultasi Gratis</h3>
+                        <form id="consultationForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Nama Lengkap Mempelai Pria *</label>
+                                    <input type="text" id="groomName" required class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Nama Lengkap Mempelai Wanita *</label>
+                                    <input type="text" id="brideName" required class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Nomor WhatsApp *</label>
+                                    <input type="tel" id="phone" required placeholder="08123456789" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Email *</label>
+                                    <input type="email" id="email" required class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Tanggal Resepsi *</label>
+                                    <input type="date" id="weddingDate" required class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Paket Dipilih *</label>
+                                    <select id="selectedPackage" required class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                        <option value="">Pilih Paket</option>
+                                        <option value="Silver">Silver - Rp 35.000.000</option>
+                                        <option value="Gold">Gold - Rp 65.000.000</option>
+                                        <option value="Platinum">Platinum - Rp 120.000.000</option>
+                                        <option value="Custom">Custom Package</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Jumlah Tamu *</label>
+                                    <input type="number" id="guestCount" required min="50" placeholder="300" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-3">Budget (Rp) *</label>
+                                    <input type="number" id="budget" required placeholder="65000000" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Lokasi Resepsi *</label>
+                                <input type="text" id="venue" required placeholder="Contoh: Hotel Grand Indonesia, Jakarta Pusat" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Tema & Konsep Impian</label>
+                                <input type="text" id="theme" placeholder="Contoh: Garden Party, Rustic, Modern Minimalist" class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Pesan & Keinginan Khusus</label>
+                                <textarea id="message" rows="4" placeholder="Ceritakan visi dan keinginan khusus untuk resepsi impian Anda..." class="w-full px-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-5 px-6 rounded-xl text-lg transition transform hover:scale-105 shadow-xl">
+                                <i class="fas fa-paper-plane mr-3"></i>
+                                Kirim Konsultasi Gratis
+                            </button>
+                        </form>
+                        
+                        <div id="successMessage" class="hidden mt-8 p-6 bg-green-50 border border-green-200 text-green-800 rounded-xl">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-2xl mr-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">Terima kasih!</h4>
+                                    <p>Konsultasi Anda telah terkirim. Tim kami akan menghubungi Anda dalam 24 jam untuk membahas detail lebih lanjut.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Info -->
+                    <div class="space-y-8">
+                        <!-- Office Info -->
+                        <div class="bg-white rounded-3xl shadow-2xl p-10">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-8">Informasi Kontak</h3>
+                            <div class="space-y-6">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fab fa-whatsapp text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">WhatsApp</h4>
+                                        <a href="https://wa.me/6282196494957?text=Halo%20Royal%20Wedding%20Organizer,%20saya%20tertarik%20dengan%20layanan%20resepsi%20pernikahan%20Anda" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-green-600 transition">+62 821-9649-4957</a>
+                                        <p class="text-sm text-gray-500">Respon cepat 24/7</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-envelope text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Email</h4>
+                                        <a href="mailto:fikifickyfickyandrian@gmail.com" class="text-gray-600 hover:text-blue-600 transition">fikifickyfickyandrian@gmail.com</a>
+                                        <p class="text-sm text-gray-500">Respon dalam 2 jam</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-map-marker-alt text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Alamat Kantor</h4>
+                                        <p class="text-gray-600">Jl. Ablam No. 12A<br>Makassar 90143</p>
+                                        <p class="text-sm text-gray-500">Buka: Senin-Sabtu 09:00-18:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-phone text-xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900">Telepon</h4>
+                                        <p class="text-gray-600">(+62) 0821-9649-4957</p>
+                                        <p class="text-sm text-gray-500">Jam kerja: 09:00-18:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Hours -->
+                        <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-white">
+                            <h3 class="text-2xl font-bold mb-6">Jam Operasional</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span>Senin - Jumat</span>
+                                    <span class="font-bold">09:00 - 18:00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Sabtu</span>
+                                    <span class="font-bold">09:00 - 15:00</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Minggu</span>
+                                    <span class="font-bold">Appointment Only</span>
+                                </div>
+                                <div class="border-t border-white/20 pt-4 mt-6">
+                                    <div class="flex items-center justify-center">
+                                        <i class="fas fa-phone text-xl mr-3"></i>
+                                        <span class="font-bold">Emergency: 24/7</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Map -->
+                        <div class="bg-white rounded-3xl shadow-2xl p-10">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Lokasi Kantor</h3>
+                            <div class="bg-gray-200 rounded-2xl h-64 flex items-center justify-center">
+                                <div class="text-center text-gray-600">
+                                    <i class="fas fa-map-marked-alt text-4xl mb-4"></i>
+                                    <p class="font-medium">Peta Lokasi Kantor</p>
+                                    <p class="text-sm">Jl. Ablam No. 12A, Sulawesi Selatan</p>
+                                    <a class="mt-4 bg-purple-600 text-white px-6 py-2 rounded-full text-sm hover:bg-purple-700 transition" href="https://maps.app.goo.gl/WndhfD5TvgsU8L4VA">
+                                        Buka di Google Maps
+                                    </a>
+                                
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Consultation Modal -->
+    <div id="consultationModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900">Konsultasi Cepat</h3>
+                <button onclick="closeModal('consultationModal')" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <form id="quickConsultationForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                    <input type="text" id="quickName" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">WhatsApp</label>
+                    <input type="tel" id="quickPhone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Resepsi</label>
+                    <input type="date" id="quickDate" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Budget Estimasi</label>
+                    <select id="quickBudget" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="">Pilih Budget</option>
+                        <option value="25-50">Rp 25-50 Juta</option>
+                        <option value="50-100">Rp 50-100 Juta</option>
+                        <option value="100-200">Rp 100-200 Juta</option>
+                        <option value="200+">Rp 200+ Juta</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-6 rounded-lg transition">
+                    Kirim Konsultasi
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-4 gap-12">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-crown text-3xl text-purple-400 mr-3"></i>
+                        <h3 class="text-3xl font-bold gradient-text">Royal Wedding</h3>
+                    </div>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Mewujudkan resepsi pernikahan impian Anda dengan layanan premium dan sentuhan royal. 
+                        Kepercayaan 1000+ pasangan sejak 2014.
+                    </p>
+                    <div class="bg-purple-600/20 rounded-2xl p-6">
+                        <h4 class="font-bold text-lg mb-3">Hubungi Kami Sekarang</h4>
+                        <p class="text-gray-400 text-sm mb-4">Konsultasi gratis untuk resepsi impian Anda</p>
+                        <a href="https://wa.me/6282196494957?text=Halo%20Royal%20Wedding%20Organizer,%20saya%20tertarik%20dengan%20layanan%20resepsi%20pernikahan%20Anda" 
+                           target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition">
+                            <i class="fab fa-whatsapp mr-2"></i>
+                            Chat WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-xl mb-6">Layanan</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Wedding Planning</a></li>
+                        <li><a href="#" class="hover:text-white transition">Dekorasi & Florist</a></li>
+                        <li><a href="#" class="hover:text-white transition">Catering Premium</a></li>
+                        <li><a href="#" class="hover:text-white transition">Dokumentasi</a></li>
+                        <li><a href="#" class="hover:text-white transition">Entertainment</a></li>
+                        <li><a href="#" class="hover:text-white transition">Bridal Care</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-xl mb-6">Kontak</h4>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp text-green-500 mr-3"></i>
+                            <a href="https://wa.me/6282196494957?text=Halo%20Royal%20Wedding%20Organizer,%20saya%20tertarik%20dengan%20layanan%20resepsi%20pernikahan%20Anda" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">+62 821-9649-4957</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-500 mr-3"></i>
+                            <a href="mailto:fikifickyfickyandrian@gmail.com" class="hover:text-white transition">fikifickyfickyandrian@gmail.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-red-500 mr-3"></i>
+                            Makassar
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-yellow-500 mr-3"></i>
+                            24/7 Customer Support
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Royal Wedding Organizer. All rights reserved. | Designed with ❤️ for your special day</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Google Apps Script Web App URL - URL BARU ANDA
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQ5M97ExQ_HAQPPLdMG6n6biB7WFl5_bTxPyYhi6Ru_v6U4a5WFtkH-j-tzk4jM2m8/exec';
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to current nav link
+            document.querySelectorAll(`[onclick="showPage('${pageId}')"]`).forEach(link => {
+                link.classList.add('active');
+            });
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Package selection
+        function selectPackage(packageName, price) {
+            document.getElementById('selectedPackage').value = packageName;
+            document.getElementById('budget').value = price;
+            showPage('contact');
+            
+            // Scroll to form
+            setTimeout(() => {
+                document.getElementById('consultationForm').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 100);
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Gallery filter
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const filters = document.querySelectorAll('.gallery-filter');
+            
+            // Update filter buttons
+            filters.forEach(filter => {
+                filter.classList.remove('active', 'bg-purple-600', 'text-white');
+                filter.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('active', 'bg-purple-600', 'text-white');
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = e.target.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            // Show loading state
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>Mengirim...';
+            submitButton.disabled = true;
+            
+            const formData = {
+                timestamp: new Date().toLocaleString('id-ID'),
+                groomName: document.getElementById('groomName').value,
+                brideName: document.getElementById('brideName').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                weddingDate: document.getElementById('weddingDate').value,
+                selectedPackage: document.getElementById('selectedPackage').value,
+                guestCount: document.getElementById('guestCount').value,
+                budget: document.getElementById('budget').value,
+                venue: document.getElementById('venue').value,
+                theme: document.getElementById('theme').value || '',
+                message: document.getElementById('message').value || '',
+                source: 'Website Royal Wedding'
+            };
+
+            // Send to Google Apps Script
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                // Show success message
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('consultationForm').reset();
+                
+                // Reset button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Show success message anyway (due to no-cors mode)
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('consultationForm').reset();
+                
+                // Reset button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Quick consultation form
+        document.getElementById('quickConsultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                timestamp: new Date().toLocaleString('id-ID'),
+                groomName: document.getElementById('quickName').value,
+                brideName: '',
+                phone: document.getElementById('quickPhone').value,
+                email: '',
+                weddingDate: document.getElementById('quickDate').value,
+                selectedPackage: 'Quick Consultation',
+                guestCount: '',
+                budget: document.getElementById('quickBudget').value,
+                venue: '',
+                theme: '',
+                message: 'Quick consultation request',
+                source: 'Quick Modal'
+            };
+
+            // Send to Google Apps Script
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                closeModal('consultationModal');
+                alert('Terima kasih! Tim kami akan menghubungi Anda segera.');
+                document.getElementById('quickConsultationForm').reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                closeModal('consultationModal');
+                alert('Terima kasih! Tim kami akan menghubungi Anda segera.');
+                document.getElementById('quickConsultationForm').reset();
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+            
+            // Add fade-in animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9882206776e60fad',t:'MTc1OTM4NjM3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
